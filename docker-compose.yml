@@ -1,0 +1,47 @@
+version: '3.4'
+
+services:
+  mongodb:
+    image: mvertes/alpine-mongo
+    ports:
+      - 27017:27017
+  postgres:
+    image: postgres:12-alpine
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=Secr3t
+      - POSTGRES_DB=graph
+  rabbitmq:
+    image: rabbitmq:3.8-management-alpine
+    restart: always
+    ports:
+      - 8080:15672
+      - 5672:5672
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=Secr3t
+  graph.api:
+    image: ${DOCKER_REGISTRY-}graphapi
+    ports:
+      # - 5017:443
+      - 5016:80
+    build:
+      context: .
+      dockerfile: Dockerfile
+    environment:
+      - ServiceBus__Url=rabbitmq://rabbitmq
+      - ServiceBus__Transport=rabbitmq
+      - ServiceBus__Queue=graph-queue
+      - ServiceBus__Credentials__Username=admin
+      - ServiceBus__Credentials__Password=Secr3t
+      - ConnectionStrings__WriteDatabaseProvider=postgres
+      - ConnectionStrings__WriteDatabase=Host=postgres;Database=graph;Username=user;Password=Secr3t
+      - ConnectionStrings__ReadDatabaseProvider=mongodb
+      - ConnectionStrings__ReadDatabase=mongodb://mongodb:27017
+      # - ASPNETCORE_URLS=http://*:5016
+    depends_on:
+      - postgres
+      - rabbitmq
+      - mongodb
