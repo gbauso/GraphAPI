@@ -1,0 +1,24 @@
+version: '3.4'
+
+services:
+  mongodb:
+    image: mvertes/alpine-mongo
+    ports:
+      - 27017:27017
+  postgres:
+    image: postgres:12-alpine
+    ports:
+      - 5432:5432
+    environment:
+      - POSTGRES_USER=user
+      - POSTGRES_PASSWORD=Secr3t
+      - POSTGRES_DB=graph
+  rabbitmq:
+    image: rabbitmq:3.8-management-alpine
+    restart: always
+    ports:
+      - 8080:15672
+      - 5672:5672
+    environment:
+      - RABBITMQ_DEFAULT_USER=admin
+      - RABBITMQ_DEFAULT_PASS=Secr3t
