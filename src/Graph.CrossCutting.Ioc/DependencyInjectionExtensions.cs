@@ -109,7 +109,7 @@ namespace Graph.CrossCutting.IoC
 
             serviceCollection.AddSingleton<PaginationType>();
             serviceCollection.AddSingleton<FilterType>();
-            serviceCollection.AddSingleton<EnumFilterType<TaskStatusEnumType>>();
+            serviceCollection.AddSingleton<EnumFilterType>();
             serviceCollection.AddSingleton<DateFilterType>();
 
             #endregion
