@@ -10,5 +10,5 @@ build_script:
 
 test_script:
 - dotnet test
-- OpenCover.Console.exe -register:user -target:"%xunit20%\xunit.console.x86.exe" -targetargs:".\test\Graph.Tests\bin\Debug\netcoreapp3.0\Graph.Tests.dll -noshadow" -filter:"+[Graph.API*]* -[Graph.Tests*]*" -output:".\graph_coverage.xml"
+- OpenCover.Console.exe -register:user -target:"dotnet" -targetargs:"test" -output:".\graph_coverage.xml" -oldstyle
 - codecov -f "graph_coverage_coverage.xml" 
