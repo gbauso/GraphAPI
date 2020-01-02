@@ -10,5 +10,5 @@ build_script:
 
 test_script:
 - dotnet test
-- OpenCover.Console.exe -register:user -target:"dotnet" -targetargs:"test" -output:".\graph_coverage.xml" -oldstyle
+- OpenCover.Console.exe -register:user -target:"c:\Program Files\dotnet\dotnet.exe" -targetargs:"test" -output:".\graph_coverage.xml" -oldstyle
 - codecov -f "graph_coverage_coverage.xml" 
