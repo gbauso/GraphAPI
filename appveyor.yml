@@ -5,8 +5,8 @@ before_build:
 - choco install opencover.portable
 - choco install codecov
 
-build:
-- dotnet build
+build_script:
+- sh: dotnet build
 
 test_script:
 - dotnet test
