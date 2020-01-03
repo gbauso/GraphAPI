@@ -2,13 +2,13 @@ image: Visual Studio 2019
 
 before_build:
 - dotnet restore
-- choco install opencover.portable
-- choco install codecov
+# - choco install opencover.portable
+# - choco install codecov
 
 build_script:
 - sh: dotnet build
 
 test_script:
 - dotnet test
-- OpenCover.Console.exe -register:user -target:"c:\Program Files\dotnet\dotnet.exe" -targetargs:"test" -filter:"+[*]* -[*.test]* -[*.Test]*" -output:".\graph_coverage.xml" -oldstyle
-- codecov -f "graph_coverage_coverage.xml" 
+# - OpenCover.Console.exe -register:user -target:"c:\Program Files\dotnet\dotnet.exe" -targetargs:"test" -filter:"+[*]* -[*.test]* -[*.Test]*" -output:".\graph_coverage.xml" -oldstyle
+# - codecov -f "graph_coverage_coverage.xml" 
