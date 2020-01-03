@@ -17,7 +17,7 @@ after_build:
 - export PATH=$SONAR_SCANNER_HOME/bin:$PATH
 - export SONAR_SCANNER_OPTS="-server"
 
-- sonar-scanner -Dsonar.projectKey=gbauso_GraphAPI -Dsonar.organization=gbauso -Dsonar.sources=. -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=c9637c6be7788b1eb7c14f14984a08971652bfed
+- sonar-scanner -Dsonar.projectKey=gbauso_GraphAPI -Dsonar.organization=gbauso -Dsonar.sources=src -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=c9637c6be7788b1eb7c14f14984a08971652bfed
 
 test_script:
 - dotnet test
