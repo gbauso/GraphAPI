@@ -8,6 +8,10 @@ This project is an experimental proof of concept which exposes a GraphQL API.\
 It consists on a task manager, including User, Project and Task management.\
 There is inspiration on DDD, Hexagonal Architecture and CQRS.
 
+## Architecture
+
+![architecture](architecture.png)
+
 ## Schema
 
 ```graphql
