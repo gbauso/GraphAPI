@@ -1,6 +1,7 @@
 # GraphAPI
 
 [![Build status](https://ci.appveyor.com/api/projects/status/lnsv5ymfgu16d22t/branch/develop?svg=true)](https://ci.appveyor.com/project/gbauso/graphapi/branch/develop)
+[![CodeFactor](https://www.codefactor.io/repository/github/gbauso/graphapi/badge)](https://www.codefactor.io/repository/github/gbauso/graphapi)
 
 [![Build history](https://buildstats.info/appveyor/chart/gbauso/graphapi)](https://ci.appveyor.com/project/gbauso/graphapi/branch/develop)
 
