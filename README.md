@@ -1,5 +1,9 @@
 # GraphAPI
 
+[![Build status](https://ci.appveyor.com/api/projects/status/lnsv5ymfgu16d22t/branch/develop?svg=true)](https://ci.appveyor.com/project/gbauso/graphapi/branch/develop)
+
+[![Build history](https://buildstats.info/appveyor/chart/gbauso/graphapi)](https://ci.appveyor.com/project/gbauso/graphapi/branch/develop)
+
 This project is an experimental proof of concept which exposes a GraphQL API.\
 It consists on a task manager, including User, Project and Task management.\
 There is inspiration on DDD, Hexagonal Architecture and CQRS.
@@ -245,7 +249,7 @@ $ docker-compose -f docker-compose-stack.yml up -d
 ```
 
 ##### Docker Compose
-By default the ports 27017 (MongoDB), 5432(PostgreSQL), 5672(RabbitMQ), 5017(HTTPS, requires SSL certificate), 5016 (HTTP).
+By default the ports 27017 (MongoDB), 5432(PostgreSQL), 5672(RabbitMQ), 5017(HTTPS, requires SSL certificate), 5016 (HTTP) will be assigned.
 
 ```sh
 $ cd {ROOT_PROJECT}
@@ -262,6 +266,7 @@ Start development on this project is simple, just open it on VSCode, Visual Stud
 
 ### Todos
 
+ - Add Codecoverage badge using Codecov
  - Write MORE Tests
  - Implement Elastic Search Manager
  - Kubernetes Implementation
