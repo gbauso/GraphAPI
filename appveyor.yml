@@ -2,6 +2,7 @@ image: Ubuntu
 
 before_build:
 - dotnet restore
+- 
 
 build_script:
 - sh: dotnet build
@@ -20,4 +21,7 @@ after_build:
 - sonar-scanner -Dsonar.projectKey=gbauso_GraphAPI -Dsonar.organization=gbauso -Dsonar.sources=src\. -Dsonar.host.url=https://sonarcloud.io -Dsonar.login=c9637c6be7788b1eb7c14f14984a08971652bfed
 
 test_script:
-- dotnet test
+- cd test\Graph.Tests
+- dotnet add package coverlet.msbuild
+- dotnet test /p:CollectCoverage=true /p:CoverletOutput=TestResults/ /p:CoverletOutputFormat=lcov
+- cd TestResults && codecov.sh -f 'coverage.info' -t '7b7d9ee8-1384-4dc7-a6b8-771cde0fb11a'
