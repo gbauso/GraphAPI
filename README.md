@@ -2,6 +2,7 @@
 
 [![Build status](https://ci.appveyor.com/api/projects/status/lnsv5ymfgu16d22t/branch/develop?svg=true)](https://ci.appveyor.com/project/gbauso/graphapi/branch/develop)
 [![CodeFactor](https://www.codefactor.io/repository/github/gbauso/graphapi/badge)](https://www.codefactor.io/repository/github/gbauso/graphapi)
+[![tests](https://img.shields.io/appveyor/tests/gbauso/graphapi/develop.svg?style=flat)](https://codecov.io/gh/gbauso/GraphAPI)
 [![codecov](https://codecov.io/gh/gbauso/GraphAPI/branch/develop/graph/badge.svg)](https://codecov.io/gh/gbauso/GraphAPI)
 
 [![Build history](https://buildstats.info/appveyor/chart/gbauso/graphapi)](https://ci.appveyor.com/project/gbauso/graphapi/branch/develop)
