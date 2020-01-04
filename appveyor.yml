@@ -1,8 +1,10 @@
 image: Ubuntu
 
+install:
+- pip install --user codecov
+
 before_build:
 - dotnet restore
-- 
 
 build_script:
 - sh: dotnet build
@@ -24,4 +26,5 @@ test_script:
 - cd test && cd Graph.Tests
 - dotnet add package coverlet.msbuild
 - dotnet test /p:CollectCoverage=true /p:CoverletOutput=TestResults/ /p:CoverletOutputFormat=lcov
-- cd TestResults && codecov.sh -f 'coverage.info' -t '7b7d9ee8-1384-4dc7-a6b8-771cde0fb11a'
+- cd TestResults 
+- cd codecov -t '7b7d9ee8-1384-4dc7-a6b8-771cde0fb11a'
