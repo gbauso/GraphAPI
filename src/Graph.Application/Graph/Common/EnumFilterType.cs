@@ -5,12 +5,12 @@ using System.Text;
 
 namespace Graph.Application.Graph.Common
 {
-    public class EnumFilterType<E> : InputObjectGraphType<Filter> where E : EnumerationGraphType
+    public class EnumFilterType: InputObjectGraphType<Filter> 
     {
         public EnumFilterType()
         {
             Field(f => f.Operation);
-            Field<E>().Name("value");
+            Field<TaskStatusEnumType>().Name("value");
         }
     }
 }

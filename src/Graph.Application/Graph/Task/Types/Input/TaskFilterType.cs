@@ -15,7 +15,7 @@ namespace Graph.Application.Graph.Project.Types.Input
             Field<DateFilterType>("deadLine");
             Field<FilterType>("assignee");
             Field<FilterType>("reporter");
-            Field<EnumFilterType<TaskStatusEnumType>>("status");
+            Field<EnumFilterType>("status");
         }
     }
 }
