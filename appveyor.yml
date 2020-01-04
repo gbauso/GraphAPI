@@ -27,4 +27,4 @@ test_script:
 - dotnet add package coverlet.msbuild
 - dotnet test /p:CollectCoverage=true /p:CoverletOutput=TestResults/ /p:CoverletOutputFormat=lcov
 - cd TestResults 
-- codecov -t '7b7d9ee8-1384-4dc7-a6b8-771cde0fb11a'
+- bash <(curl -s https://codecov.io/bash) -f coverage.info || echo "Codecov did not collect coverage reports"
