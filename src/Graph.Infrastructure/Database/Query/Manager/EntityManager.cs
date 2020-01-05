@@ -7,7 +7,7 @@ using Graph.CrossCutting.Interfaces;
 
 namespace Graph.Infrastructure.Database.Query.Manager
 {
-    public abstract class EntityManager<T> : IEntityManager<T> where T: IQueryModel
+    public abstract class EntityManager<T> : IEntityManager<T> where T: class, IQueryModel
     {
         protected readonly IManager<T> _Manager;
 

@@ -14,7 +14,7 @@ namespace Graph.Infrastructure.Database.Query
             _Configuration = options;
         }
 
-        public IManager<T> GetManager<T>() where T : IQueryModel
+        public IManager<T> GetManager<T>() where T : class, IQueryModel
         {
             switch(_Configuration.Value.ReadDatabaseProvider)
             {
@@ -22,7 +22,7 @@ namespace Graph.Infrastructure.Database.Query
                     return new MongoManager<T>(_Configuration);
 
                 case DatabaseProvider.ELASTICSEARCH:
-                    throw new NotImplementedException();
+                    return new ElasticSearchManager<T>(_Configuration);
 
                 default:
                     throw new Exception();

@@ -59,7 +59,10 @@ namespace Graph.Domain
 
             user.SetStateForRelation(false);
 
+            user.RemoveProject(this);
             Users.Update(user);
+
+
         }
 
         public void AddTask(Task task)

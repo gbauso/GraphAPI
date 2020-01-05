@@ -41,12 +41,26 @@ namespace Graph.Tests
         {
             var repository = new Mock<IUserRepository>();
 
+            var facebookProject =
+                new Project()
+                {
+                    Id = ids[4],
+                    Description = "Facebook",
+                    UserProjects = new[]
+                        {
+                            new UserProject() { Projectid = ids[4], UserId = ids[1] },
+                            new UserProject() { Projectid = ids[4], UserId = ids[2] }
+                        }
+                };
+
             var values = new List<User>()
             {
                 new User() {Id = ids[0], Name = "Bill Gates", Email = "bill@gates.com", UserProjects = new[] { new UserProject() { Projectid = ids[3], UserId = ids[0] } } },
-                new User() {Id = ids[1], Name = "Mark Zuckerberg", Email = "mark@zuckerberg.com", UserProjects = new[] { new UserProject() { Projectid = ids[4], UserId = ids[1] } }},
-                new User() {Id = ids[2], Name = "Carl", Email = "carl@facebook.com", UserProjects = new[] { new UserProject() { Projectid = ids[4], UserId = ids[2] } }}
+                new User() {Id = ids[1], Name = "Mark Zuckerberg", Email = "mark@zuckerberg.com", UserProjects = new[] { new UserProject() { Project = facebookProject, Projectid = ids[4], UserId = ids[1] } }},
+                new User() {Id = ids[2], Name = "Carl", Email = "carl@facebook.com", UserProjects = new[] { new UserProject() { Project = facebookProject, Projectid = ids[4], UserId = ids[2] } }}
             };
+
+
 
             var list = new HashSet<User>(values, comparable);
 

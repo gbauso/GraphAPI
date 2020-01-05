@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Graph.Infrastructure.Database.Query
 {
-    public interface IManager<T> where T: IQueryModel
+    public interface IManager<T> where T: class, IQueryModel
     {
         Task<bool> Index(T entry);
         Task<bool> Remove(Guid entryId);
