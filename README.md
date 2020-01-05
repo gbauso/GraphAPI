@@ -236,13 +236,13 @@ GraphAPI uses a number of open source projects and tools to work properly:
 * [RabbitMQ]() - Default
 * [Azure Service Bus]() - Optional
 * [MongoDB]() - Default
+* [ElasticSearch]() - Optional
 * [PostgreSQL]() - Default
 * [Microsoft SQL Server]() - Optional
 * [Docker]()
-
  
 ##### Soon
-* [ElasticSearch]() 
+ 
 * [Kubernetes]() 
 
 ### Installation
@@ -274,8 +274,8 @@ Start development on this project is simple, just open it on VSCode, Visual Stud
 ### Todos
 
  - [x] Add Codecoverage badge using Codecov
+ - [x] Implement Elastic Search Manager
  - [ ] Write MORE Tests to increase coverage
- - [ ] Implement Elastic Search Manager
  - [ ] Kubernetes Implementation
  - [ ] Add Notes on Tasks
 
