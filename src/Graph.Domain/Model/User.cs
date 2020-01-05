@@ -48,6 +48,11 @@ namespace Graph.Domain
             Projects.Add(project);
         }
 
+        public void RemoveProject(Project project)
+        {
+            Projects.Remove(Projects.FirstOrDefault(i => i.Id == project.Id));
+        }
+
         public void Validate()
         {
             var validator = new UserValidator();

@@ -13,7 +13,7 @@ using Graph.CrossCutting.Extensions;
 
 namespace Graph.Infrastructure.Database.Query
 {
-    public class MongoManager<T> : IManager<T> where T : IQueryModel
+    public class MongoManager<T> : IManager<T> where T : class, IQueryModel
     {
         protected readonly IMongoCollection<T> _Collection;
         protected const string MONGO_ID = "_id";
@@ -140,7 +140,6 @@ namespace Graph.Infrastructure.Database.Query
             if(string.IsNullOrEmpty(order)) return Builders<T>.Sort.Ascending(MONGO_ID);
 
             var sortTypes = new[] { "asc", "desc" };
-
             var pairFieldSortType = order.Split(' ');
 
             if (pairFieldSortType.Count() != 2) throw new QueryArgumentException("QA-01");
