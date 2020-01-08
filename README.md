@@ -1,5 +1,6 @@
 # GraphAPI
 
+[![Build Status](https://dev.azure.com/guilhermebauso/GraphAPI/_apis/build/status/gbauso.GraphAPI?branchName=develop)](https://dev.azure.com/guilhermebauso/GraphAPI/_build/latest?definitionId=1&branchName=develop)
 [![Build status](https://ci.appveyor.com/api/projects/status/lnsv5ymfgu16d22t/branch/develop?svg=true)](https://ci.appveyor.com/project/gbauso/graphapi/branch/develop)
 [![CodeFactor](https://www.codefactor.io/repository/github/gbauso/graphapi/badge)](https://www.codefactor.io/repository/github/gbauso/graphapi)
 [![tests](https://img.shields.io/appveyor/tests/gbauso/graphapi/develop.svg?style=flat)](https://codecov.io/gh/gbauso/GraphAPI)
