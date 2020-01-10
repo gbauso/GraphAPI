@@ -5,7 +5,7 @@ using Microsoft.Extensions.Options;
 
 namespace Graph.Infrastructure.Database.Query.Manager
 {
-    public class UserManager : EntityManager<User>, IEntityManager<User>
+    public class UserManager : EntityManager<User>
     {
         public UserManager(IManager<User> manager) : base(manager)
         {

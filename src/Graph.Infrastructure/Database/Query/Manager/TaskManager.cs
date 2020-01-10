@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Graph.Infrastructure.Database.Query.Manager
 {
-    public class TaskManager : EntityManager<Task>, IEntityManager<Task>
+    public class TaskManager : EntityManager<Task>
     {
         public TaskManager(IManager<Task> manager) : base(manager)
         {

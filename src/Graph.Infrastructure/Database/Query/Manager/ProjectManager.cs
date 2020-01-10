@@ -5,7 +5,7 @@ using Microsoft.Extensions.Options;
 
 namespace Graph.Infrastructure.Database.Query.Manager
 {
-    public class ProjectManager : EntityManager<Project>, IEntityManager<Project>
+    public class ProjectManager : EntityManager<Project>
     {
         public ProjectManager(IManager<Project> manager) : base(manager)
         {
