@@ -34,7 +34,7 @@ namespace Graph.Application.MessageHandler
                 }
                 else
                 {
-                    throw new Exception();
+                    throw new MethodAccessException();
                 }
             }
         }
@@ -116,8 +116,6 @@ namespace Graph.Application.MessageHandler
         }
 
         #endregion
-
-
 
     }
 }

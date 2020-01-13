@@ -25,7 +25,7 @@ namespace Graph.Infrastructure.Database.Query
                     return new ElasticSearchManager<T>(_Configuration);
 
                 default:
-                    throw new Exception();
+                    return new InMemoryManager<T>();
             }
         }
     }

@@ -2,6 +2,7 @@
 using Graph.Domain.Service.Mappings;
 using Graph.Infrastructure.Database.Command.Interfaces;
 using Graph.Infrastructure.Database.Command.Model;
+using QueryUser = Graph.Infrastructure.Database.Query.UserSchema;
 using Graph.Infrastructure.ServiceBus;
 using Moq;
 using System;
@@ -12,6 +13,9 @@ using System.Linq;
 using Graph.CrossCutting;
 using Graph.Tests.Comparers;
 using System.IO;
+using Graph.Infrastructure.Database.Query.Manager;
+using Graph.Infrastructure.Database.Query;
+using Bogus;
 
 namespace Graph.Tests
 {
@@ -39,6 +43,28 @@ namespace Graph.Tests
             var uow = new Mock<IUnitOfWork>();
 
             return uow.Object;
+        }
+
+        public static IManager<QueryUser.User> GetUserManager()
+        {
+            var userPosition = 0;
+            var projectPosition = 3;
+            var projectFaker = new Faker<QueryUser.UserProject>().StrictMode(true)
+                                                       .RuleFor(u => u.Id, f => Guids[projectPosition++].ToString())
+                                                       .RuleFor(u => u.Description, f => f.Company.CompanyName())
+                                                       .RuleFor(u => u.LongDescription, f => f.Lorem.Paragraphs(1));
+
+            var projects = projectFaker.Generate(2);
+
+            var userFaker = new Faker<QueryUser.User>().StrictMode(true)
+                                                       .RuleFor(u => u.Id, f => Guids[userPosition++].ToString())
+                                                       .RuleFor(u => u.Email, f => f.Internet.Email())
+                                                       .RuleFor(u => u.Name, f => f.Name.FullName())
+                                                       .RuleFor(u => u.Projects, f => projects);
+
+            var manager = new InMemoryManager<QueryUser.User>(userFaker.Generate(3));
+
+            return manager;
         }
 
         public static IUserRepository GetUserRepository(IEqualityComparer<User> comparable = null, Guid[] ids = null)

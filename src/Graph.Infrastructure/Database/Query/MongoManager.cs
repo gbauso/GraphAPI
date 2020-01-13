@@ -9,7 +9,6 @@ using Graph.CrossCutting.Exceptions;
 using MongoDB.Bson;
 using System.Linq;
 using Graph.CrossCutting.Interfaces;
-using Graph.CrossCutting.Extensions;
 
 namespace Graph.Infrastructure.Database.Query
 {
