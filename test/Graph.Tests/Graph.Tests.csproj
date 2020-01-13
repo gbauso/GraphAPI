@@ -23,7 +23,6 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\Graph.CrossCutting.Ioc\Graph.CrossCutting.Ioc.csproj" />
     <ProjectReference Include="..\..\src\Graph.Domain.Service\Graph.Domain.Service.csproj" />
-    <ProjectReference Include="..\..\src\GraphAPI\Graph.API.csproj" />
   </ItemGroup>
 
 </Project>

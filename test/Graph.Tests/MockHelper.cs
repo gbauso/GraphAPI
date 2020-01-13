@@ -11,14 +11,13 @@ using System.Text;
 using System.Linq;
 using Graph.CrossCutting;
 using Graph.Tests.Comparers;
-using Microsoft.AspNetCore.Http;
 using System.IO;
 
 namespace Graph.Tests
 {
     public class MockHelper
     {
-        public static Guid[] Guids = Enumerable.Repeat(Guid.NewGuid(), 7).ToArray();
+        public static Guid[] Guids = Enumerable.Range(0,7).Select(i => Guid.NewGuid()).ToArray();
 
         public static IServiceBus GetServiceBus()
         {
