@@ -50,6 +50,18 @@ namespace Graph.CrossCutting.IoC
             serviceCollection.AddScoped<IUnitOfWork, UnitOfWork>();
         }
 
+        public static void ResolveCommandDatabaseIntegrationTests(this IServiceCollection serviceCollection,
+                                                                  IUserRepository userRepository,
+                                                                  IProjectRepository projectRepository,
+                                                                  ITaskRepository taskRepository,
+                                                                  IUnitOfWork unitOfWork)
+        {
+            serviceCollection.AddScoped(sp => userRepository);
+            serviceCollection.AddScoped(sp => projectRepository);
+            serviceCollection.AddScoped(sp => taskRepository);
+            serviceCollection.AddScoped(sp => unitOfWork);
+        }
+
         public static void ResolveQueryDatabase(this IServiceCollection serviceCollection)
         {
             serviceCollection.AddSingleton<ManagerFactory>();
@@ -92,7 +104,7 @@ namespace Graph.CrossCutting.IoC
 
         #endregion
 
-        public static void ResolveGraphDependencies(this IServiceCollection serviceCollection)
+        public static void ResolveGraphDependencies(this IServiceCollection serviceCollection, bool testing = false)
         {
             serviceCollection.AddSingleton<IDependencyResolver>(s => new FuncDependencyResolver(s.GetRequiredService));
 
@@ -190,7 +202,7 @@ namespace Graph.CrossCutting.IoC
 
             #endregion
 
-            serviceCollection.AddSingleton<ISchema, GraphSchema>();
+            if(!testing) serviceCollection.AddSingleton<ISchema, GraphSchema>();
         }
 
         public static void ResolveAuxiliaries(this IServiceCollection serviceCollection)

@@ -81,7 +81,7 @@ namespace Graph.API
                 using (var context = serviceScope.ServiceProvider.GetRequiredService<GraphContext>())
                 {
                     context.Database.EnsureCreated();
-                    context.Database.Migrate();
+                    if(!context.Database.IsInMemory()) context.Database.Migrate();
                 }
             }
         }

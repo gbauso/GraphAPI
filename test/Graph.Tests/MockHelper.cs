@@ -10,11 +10,16 @@ using Thread = System.Threading.Tasks;
 using System.Text;
 using System.Linq;
 using Graph.CrossCutting;
+using Graph.Tests.Comparers;
+using Microsoft.AspNetCore.Http;
+using System.IO;
 
 namespace Graph.Tests
 {
     public class MockHelper
     {
+        public static Guid[] Guids = Enumerable.Repeat(Guid.NewGuid(), 7).ToArray();
+
         public static IServiceBus GetServiceBus()
         {
             var serviceBus = new Mock<IServiceBus>();
@@ -37,8 +42,11 @@ namespace Graph.Tests
             return uow.Object;
         }
 
-        public static IUserRepository GetUserRepository(IEqualityComparer<User> comparable, Guid[] ids)
+        public static IUserRepository GetUserRepository(IEqualityComparer<User> comparable = null, Guid[] ids = null)
         {
+            if (comparable == null) comparable = new UserComparer();
+            if (ids == null) ids = Guids;
+
             var repository = new Mock<IUserRepository>();
 
             var facebookProject =
@@ -59,8 +67,6 @@ namespace Graph.Tests
                 new User() {Id = ids[1], Name = "Mark Zuckerberg", Email = "mark@zuckerberg.com", UserProjects = new[] { new UserProject() { Project = facebookProject, Projectid = ids[4], UserId = ids[1] } }},
                 new User() {Id = ids[2], Name = "Carl", Email = "carl@facebook.com", UserProjects = new[] { new UserProject() { Project = facebookProject, Projectid = ids[4], UserId = ids[2] } }}
             };
-
-
 
             var list = new HashSet<User>(values, comparable);
 
@@ -85,8 +91,11 @@ namespace Graph.Tests
             return repository.Object;
         }
 
-        public static IProjectRepository GetProjectRepository(IEqualityComparer<Project> comparable, Guid[] ids)
+        public static IProjectRepository GetProjectRepository(IEqualityComparer<Project> comparable = null, Guid[] ids = null)
         {
+            if (comparable == null) comparable = new ProjectComparer();
+            if (ids == null) ids = Guids;
+
             var repository = new Mock<IProjectRepository>();
 
             var users = new List<User>()
@@ -171,8 +180,11 @@ namespace Graph.Tests
             return repository.Object;
         }
 
-        public static ITaskRepository GetTaskRepository(IEqualityComparer<Task> comparable, Guid[] ids)
+        public static ITaskRepository GetTaskRepository(IEqualityComparer<Task> comparable = null, Guid[] ids = null)
         {
+            if (comparable == null) comparable = new TaskComparer();
+            if (ids == null) ids = Guids;
+
             var repository = new Mock<ITaskRepository>();
 
             var users = new List<User>()
