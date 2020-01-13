@@ -13,8 +13,7 @@ after_build:
 - dotnet sonarscanner end /d:sonar.login="c9637c6be7788b1eb7c14f14984a08971652bfed" 
 
 test_script:
-- cd test && cd Graph.Tests
-- dotnet add package coverlet.msbuild
-- dotnet test /p:CollectCoverage=true /p:CoverletOutput=TestResults/ /p:CoverletOutputFormat=lcov /p:Exclude=\"[Graph.API]*%2c[Graph.Infrastructure]*%2c[Graph.CrossCutting*]*\" 
+# - cd test && cd Graph.Tests
+- dotnet test /p:CollectCoverage=true /p:CoverletOutput=TestResults/ /p:CoverletOutputFormat=lcov /p:Exclude=\"[Graph.API]*%2c[Graph.Infrastructure]*%2c[Graph.CrossCutting*]*%2c[Graph.Application.MessageHandler]*\" 
 - cd TestResults 
 - bash <(curl -s https://codecov.io/bash) -f coverage.info -t 7b7d9ee8-1384-4dc7-a6b8-771cde0fb11a || echo "Codecov did not collect coverage reports"
