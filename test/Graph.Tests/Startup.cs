@@ -4,8 +4,9 @@ using Xunit.Abstractions;
 using Xunit.DependencyInjection;
 using Graph.CrossCutting.IoC;
 using Graph.Infrastructure.Database.Query.UserSchema;
-using Graph.Infrastructure.Database.Query;
 using Graph.Infrastructure.Database.Query.Manager;
+using Graph.Infrastructure.Database.Query.ProjectSchema;
+using Graph.Infrastructure.Database.Query.TaskSchema;
 
 [assembly: TestFramework("Graph.Tests.Startup", "Graph.Tests")]
 
@@ -23,6 +24,12 @@ namespace Graph.Tests
 
             services.AddTransient(sp => MockHelper.GetUserManager());
             services.AddTransient<IEntityManager<User>, UserManager>();
+
+            services.AddTransient(sp => MockHelper.GetProjectManager());
+            services.AddTransient<IEntityManager<Project>, ProjectManager>();
+
+            services.AddTransient(sp => MockHelper.GetTaskManager());
+            services.AddTransient<IEntityManager<Task>, TaskManager>();
 
             services.AddTransient(sp => MockHelper.GetServiceBus());
             services.AddTransient(sp => MockHelper.GetUserRepository());

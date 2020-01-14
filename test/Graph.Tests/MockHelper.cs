@@ -3,19 +3,19 @@ using Graph.Domain.Service.Mappings;
 using Graph.Infrastructure.Database.Command.Interfaces;
 using Graph.Infrastructure.Database.Command.Model;
 using QueryUser = Graph.Infrastructure.Database.Query.UserSchema;
+using QueryProject = Graph.Infrastructure.Database.Query.ProjectSchema;
+using QueryTask = Graph.Infrastructure.Database.Query.TaskSchema;
 using Graph.Infrastructure.ServiceBus;
 using Moq;
 using System;
 using System.Collections.Generic;
 using Thread = System.Threading.Tasks;
-using System.Text;
 using System.Linq;
 using Graph.CrossCutting;
 using Graph.Tests.Comparers;
-using System.IO;
-using Graph.Infrastructure.Database.Query.Manager;
 using Graph.Infrastructure.Database.Query;
 using Bogus;
+using Graph.CrossCutting.Extensions;
 
 namespace Graph.Tests
 {
@@ -63,6 +63,76 @@ namespace Graph.Tests
                                                        .RuleFor(u => u.Projects, f => projects);
 
             var manager = new InMemoryManager<QueryUser.User>(userFaker.Generate(3));
+
+            return manager;
+        }
+
+        public static IManager<QueryProject.Project> GetProjectManager()
+        {
+            var userPosition = 0;
+            var projectPosition = 3;
+            var taskPosition = 5;
+            var userFaker = new Faker<QueryProject.ProjectUser>().StrictMode(true)
+                                                       .RuleFor(u => u.Id, f => Guids[userPosition++].ToString())
+                                                       .RuleFor(u => u.Name, f => f.Name.FullName());
+
+            var users = userFaker.Generate(3);
+
+            var taskFaker = new Faker<QueryProject.ProjectTask>().StrictMode(true)
+                                                       .RuleFor(u => u.Id, f => Guids[taskPosition++].ToString())
+                                                       .RuleFor(u => u.Description, f => f.Lorem.Sentence(25))
+                                                       .RuleFor(u => u.Responsible, f => users[f.Random.Number(0,2)].Name)
+                                                       .RuleFor(u => u.Status, f => ((TaskStatusEnum)f.Random.Number(1, 4)).ToString());
+
+            var tasks = taskFaker.Generate(2);
+
+            var projectFaker = new Faker<QueryProject.Project>().StrictMode(true)
+                                                       .RuleFor(u => u.Id, f => Guids[projectPosition++].ToString())
+                                                       .RuleFor(u => u.Description, f => f.Company.CompanyName())
+                                                       .RuleFor(u => u.Participants, f => users)
+                                                       .RuleFor(u => u.Tasks, f => tasks)
+                                                       .RuleFor(u => u.UnfinishedCount, f => tasks.Count(i => i.Status != TaskStatusEnum.DONE.ToString()))
+                                                       .RuleFor(u => u.FinishedCount, f => tasks.Count(i => i.Status == TaskStatusEnum.DONE.ToString()))
+                                                       .RuleFor(u => u.LongDescription, f => f.Lorem.Paragraphs(1));
+
+            var projects = projectFaker.Generate(2);
+
+            var manager = new InMemoryManager<QueryProject.Project>(projects);
+
+            return manager;
+        }
+
+        public static IManager<QueryTask.Task> GetTaskManager()
+        {
+            var userPosition = 0;
+            var projectPosition = 3;
+            var taskPosition = 5;
+            var userFaker = new Faker<QueryTask.TaskUser>().StrictMode(true)
+                                                       .RuleFor(u => u.Id, f => Guids[userPosition++].ToString())
+                                                       .RuleFor(u => u.Name, f => f.Name.FullName());
+
+            var users = userFaker.Generate(3);
+
+            var projectFaker = new Faker<QueryTask.TaskProject>().StrictMode(true)
+                                                       .RuleFor(u => u.Id, f => Guids[projectPosition++].ToString())
+                                                       .RuleFor(u => u.Description, f => f.Company.CompanyName());
+
+            var projects = projectFaker.Generate(2);
+
+            var taskFaker = new Faker<QueryTask.Task>().StrictMode(true)
+                                                       .RuleFor(u => u.Id, f => Guids[taskPosition++].ToString())
+                                                       .RuleFor(u => u.Description, f => f.Lorem.Sentence(25))
+                                                       .RuleFor(u => u.LongDescription, f => f.Lorem.Paragraphs(2))
+                                                       .RuleFor(u => u.CreatedDate, f => f.Date.Past().ToUnixTime())
+                                                       .RuleFor(u => u.DeadLine, f => f.Date.Soon(f.Random.Number(1, 25)).ToUnixTime())
+                                                       .RuleFor(u => u.Assignee, f => users[f.Random.Number(0, 2)])
+                                                       .RuleFor(u => u.Reporter, f => users[f.Random.Number(0, 2)])
+                                                       .RuleFor(u => u.Project, f => projects.FirstOrDefault(i => i.Id == Guids[f.Random.Number(0, 1)].ToString()))
+                                                       .RuleFor(u => u.Status, f => ((TaskStatusEnum)f.Random.Number(1, 4)).ToString());
+
+            var tasks = taskFaker.Generate(2);
+
+            var manager = new InMemoryManager<QueryTask.Task>(tasks);
 
             return manager;
         }

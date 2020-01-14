@@ -1,6 +1,6 @@
 ﻿using FluentAssertions;
 using Graph.Application.Graph.Query;
-using Graph.Infrastructure.Database.Query.UserSchema;
+using Graph.Infrastructure.Database.Query.ProjectSchema;
 using GraphQL;
 using GraphQL.Types;
 using Moq;
@@ -11,12 +11,12 @@ using System.Linq;
 
 namespace Graph.Tests
 {
-    public class UserQueryTest
+    public class ProjectQueryTest
     {
         private readonly IDocumentExecuter _Executer;
         private readonly ISchema _Schema;
 
-        public UserQueryTest(IDocumentExecuter executor, UserQuery query)
+        public ProjectQueryTest(IDocumentExecuter executor, ProjectQuery query)
         {
             _Executer = executor;
 
@@ -25,11 +25,11 @@ namespace Graph.Tests
             _Schema = schemaMock;
         }
 
-        [Fact(DisplayName = "Invalid User Query ( without pagination )")]
-        [Trait("Integration", "User")]
-        public async void DocumentExecuter_UserQuery_InvalidQuery_MissingPagination()
+        [Fact(DisplayName = "Invalid Project Query ( without pagination )")]
+        [Trait("Integration", "Project")]
+        public async void DocumentExecuter_ProjectQuery_InvalidQuery_MissingPagination()
         {
-            var request = "query { users() { id, name } }";
+            var request = "query { projects() { id, description } }";
 
             var result = await _Executer.ExecuteAsync(_ =>
             {
@@ -40,11 +40,11 @@ namespace Graph.Tests
             result.Errors.Should().NotBeEmpty();
         }
 
-        [Fact(DisplayName = "Invalid User Query ( without projection )")]
-        [Trait("Integration", "User")]
-        public async void DocumentExecuter_UserQuery_InvalidQuery_MissingProjection()
+        [Fact(DisplayName = "Invalid Project Query ( without projection )")]
+        [Trait("Integration", "Project")]
+        public async void DocumentExecuter_ProjectQuery_InvalidQuery_MissingProjection()
         {
-            var request = "query { users(pagination: { skip: 0, take: 10 }) { } }";
+            var request = "query { projects(pagination: { skip: 0, take: 10 }) { } }";
 
             var result = await _Executer.ExecuteAsync(_ =>
             {
@@ -55,11 +55,11 @@ namespace Graph.Tests
             result.Errors.Should().NotBeEmpty();
         }
 
-        [Fact(DisplayName = "Get valid users")]
-        [Trait("Integration", "User")]
-        public async void DocumentExecuter_UserQuery_GetUsers()
+        [Fact(DisplayName = "Get valid projects")]
+        [Trait("Integration", "Project")]
+        public async void DocumentExecuter_ProjectQuery_GetProjects()
         {
-            var request = "query { users(pagination: { skip: 0, take: 10 }) { id, name } }";
+            var request = "query { projects(pagination: { skip: 0, take: 10 }) { id, description } }";
 
             var result = await _Executer.ExecuteAsync(_ =>
             {
@@ -70,11 +70,11 @@ namespace Graph.Tests
             result.Errors.Should().BeNullOrEmpty();
         }
 
-        [Fact(DisplayName = "Get valid users with filters")]
-        [Trait("Integration", "User")]
-        public async void DocumentExecuter_UserQuery_GetUsers_WithFilters()
+        [Fact(DisplayName = "Get valid projects with filters")]
+        [Trait("Integration", "Project")]
+        public async void DocumentExecuter_ProjectQuery_GetProjects_WithFilters()
         {
-            var request = "query { users(pagination: { skip: 0, take: 10 }, filter: { name: {operation: \"c\", value: \"a\" } }) { id, name, projects { description } } }";
+            var request = "query { projects(pagination: { skip: 0, take: 10 }, filter: { description: {operation: \"c\", value: \"a\" } }) { id, description } }";
 
             var result = await _Executer.ExecuteAsync(_ =>
             {
@@ -85,11 +85,11 @@ namespace Graph.Tests
             result.Errors.Should().BeNullOrEmpty();
         }
 
-        [Fact(DisplayName = "Get a valid user")]
-        [Trait("Integration", "User")]
-        public async void DocumentExecuter_UserQuery_GetUser()
+        [Fact(DisplayName = "Get a valid project")]
+        [Trait("Integration", "Project")]
+        public async void DocumentExecuter_ProjectQuery_GetProject()
         {
-            var request = "query { user(id: \""+ MockHelper.Guids[1] +"\") { id, name } }";
+            var request = "query { project(id: \""+ MockHelper.Guids[3] + "\") { id, description } }";
 
             var result = await _Executer.ExecuteAsync(_ =>
             {
