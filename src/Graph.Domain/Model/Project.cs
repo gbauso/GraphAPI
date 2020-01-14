@@ -70,7 +70,7 @@ namespace Graph.Domain
             task.Validate();
 
             if (Tasks.Any(i => i.Id == task.Id)) throw new ValidationException("PROJTASK-01");
-            if (!Users.Any(i => i.Id == task.Assignee.Id && i.Id == task.Reporter.Id)) throw new ValidationException("PROJTASK-02");
+            if (!Users.Any(i => i.Id == task.Assignee.Id) || !Users.Any(i => i.Id == task.Reporter.Id)) throw new ValidationException("PROJTASK-02");
 
             Tasks.Add(task);
         }

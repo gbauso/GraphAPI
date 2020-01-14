@@ -21,10 +21,11 @@
     <PackageReference Include="Microsoft.Extensions.Options" Version="3.0.0" />
     <PackageReference Include="NEST" Version="7.4.2" />
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="3.0.1" />
-    <PackageReference Include="WindowsAzure.ServiceBus" Version="6.0.0" />
     <PackageReference Include="MongoDB.DriVer" Version="2.9.2" />
     <PackageReference Include="MongoDB.DriVer.Core" Version="2.9.2" />
-    <PackageReference Include="MongoDB.Bson" Version="2.9.2" />        
+    <PackageReference Include="MongoDB.Bson" Version="2.9.2" />
+    <PackageReference Include="System.Linq.Dynamic.Core" Version="1.0.20" />
+    <PackageReference Include="WindowsAzure.ServiceBus" Version="6.0.0" />        
   </ItemGroup>
 
   <ItemGroup>

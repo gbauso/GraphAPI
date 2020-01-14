@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.29411.108
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Graph.API", "src\GraphAPI\Graph.API.csproj", "{715FC768-FF1C-4CA9-8774-AA331A73C1F5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Graph.API", "src\Graph.API\Graph.API.csproj", "{715FC768-FF1C-4CA9-8774-AA331A73C1F5}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Graph.Application", "src\Graph.Application\Graph.Application.csproj", "{CF070433-F00D-4F06-A562-1943CB9E274B}"
 EndProject

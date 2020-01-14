@@ -92,7 +92,7 @@ namespace Graph.CrossCutting.IoC
 
         #endregion
 
-        public static void ResolveGraphDependencies(this IServiceCollection serviceCollection)
+        public static void ResolveGraphDependencies(this IServiceCollection serviceCollection, bool testing = false)
         {
             serviceCollection.AddSingleton<IDependencyResolver>(s => new FuncDependencyResolver(s.GetRequiredService));
 
@@ -190,7 +190,7 @@ namespace Graph.CrossCutting.IoC
 
             #endregion
 
-            serviceCollection.AddSingleton<ISchema, GraphSchema>();
+            if(!testing) serviceCollection.AddSingleton<ISchema, GraphSchema>();
         }
 
         public static void ResolveAuxiliaries(this IServiceCollection serviceCollection)

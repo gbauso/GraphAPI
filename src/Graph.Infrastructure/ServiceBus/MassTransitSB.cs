@@ -72,11 +72,11 @@ namespace Graph.Infrastructure.ServiceBus
                 default:
                     bus = Bus.Factory.CreateUsingInMemory(cfg =>
                     {
-                        cfg.ReceiveEndpoint(config.Queue, e =>
+                        cfg.ReceiveEndpoint("memory.queue", ep =>
                         {
-                            e.Handler<Message>(ctx => _Subscriber.HandleMessage(ctx.Message));
+                            ep.Handler<Message>(ctx => _Subscriber.HandleMessage(ctx.Message));
 
-                            EndpointConvention.Map<Message>(e.InputAddress);
+                            EndpointConvention.Map<Message>(ep.InputAddress);
                         });
                     });
                     break;

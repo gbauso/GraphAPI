@@ -25,6 +25,7 @@ namespace Graph.Domain.Service.CommandHandler
         {
             _UnitOfWork = unitOfWork;
             _Bus = bus;
+
             _UserRepository = userRepository;
             _Mapper = mapper;
         }

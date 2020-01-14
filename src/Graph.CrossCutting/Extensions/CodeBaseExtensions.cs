@@ -24,9 +24,9 @@ namespace Graph.CrossCutting.Extensions
             }
         }
 
-        public static bool ListIsNullOrEmpty<L>(this ICollection<L> list)
+        public static bool ListIsNullOrEmpty<L>(this IEnumerable<L> list)
         {
-            return list.IsNull() || list.Count == 0;
+            return list.IsNull() || list.Count() == 0 || list.Any(i => i.IsNull());
         }
 
         public static long ToUnixTime(this DateTime date)

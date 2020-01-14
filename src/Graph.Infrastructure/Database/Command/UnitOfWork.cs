@@ -1,7 +1,5 @@
 ﻿using Graph.Infrastructure.Database.Command.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using Microsoft.EntityFrameworkCore;
 using Thread = System.Threading.Tasks;
 
 namespace Graph.Infrastructure.Database.Command
@@ -16,6 +14,8 @@ namespace Graph.Infrastructure.Database.Command
         }
         public async Thread.Task Commit()
         {
+            if (_Context.Database.IsInMemory()) return;
+
             using (var transaction = _Context.Database.BeginTransaction())
             {
                 try
